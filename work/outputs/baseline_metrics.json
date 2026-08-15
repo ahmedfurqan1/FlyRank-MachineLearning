@@ -1,0 +1,31 @@
+{
+  "assignment": "w04_baseline_score",
+  "observation_window": "2026-03",
+  "outcome_window": "2026-04",
+  "sealed_test_month": "2026-06",
+  "evaluation_rows": 158549,
+  "eligible_queue_items": 23716,
+  "decline_threshold": -0.15,
+  "overall_decline_base_rate": 0.5108,
+  "precision_at_20": 0.9,
+  "precision_at_50": 0.84,
+  "signal_verdicts": {
+    "march_impression_volume": "MIXED",
+    "position_adjusted_ctr": "MIXED"
+  },
+  "rule": {
+    "minimum_march_impressions": 100,
+    "minimum_march_avg_position_exclusive": 0,
+    "maximum_march_avg_position_inclusive": 20,
+    "required_march_clicks": 0,
+    "score": "march_impressions for eligible items; zero otherwise",
+    "reason_code": "visible_zero_ctr_top20",
+    "action_label": "review_title_and_meta"
+  },
+  "leakage_checks": {
+    "score_reconstructs_exactly": true,
+    "no_future_or_label_derived_score_inputs": true,
+    "no_future_or_label_derived_export_fields": true
+  },
+  "evaluation_note": "Retrospective March-April result on the development slice; not out-of-sample performance."
+}
