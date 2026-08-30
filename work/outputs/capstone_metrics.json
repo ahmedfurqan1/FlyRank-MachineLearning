@@ -1,0 +1,370 @@
+{
+  "assignment": "capstone",
+  "lane": "refresh_content_opportunity_scoring",
+  "release_build": "flyrank_pseudonymized_warehouse_release_v20260703",
+  "selected_method": "fixed_baseline",
+  "unit_of_analysis": "one_pseudonymized_client_content_pair_per_monthly_window",
+  "random_seed": 42,
+  "label": {
+    "decline_threshold_fraction": -0.15,
+    "definition": "outcome_impressions_more_than_15_pct_below_feature_month"
+  },
+  "development_evaluation": {
+    "feature_month": "2026-03",
+    "outcome_month": "2026-04",
+    "analysis_row_count": 158549,
+    "client_count": 46,
+    "outcome_base_rate_pct": 51.1,
+    "group_fold_count": 5,
+    "primary_k_count": 50,
+    "secondary_k_count": 20,
+    "validation_design": "groupkfold_by_client",
+    "fold_results": [
+      {
+        "validation_fold": 1,
+        "decline_base_rate_pct": 46.3,
+        "baseline_p20_pct": 65.0,
+        "baseline_p50_pct": 56.0,
+        "logistic_p20_pct": 65.0,
+        "logistic_p50_pct": 58.0,
+        "forest_p20_pct": 65.0,
+        "forest_p50_pct": 66.0
+      },
+      {
+        "validation_fold": 2,
+        "decline_base_rate_pct": 67.8,
+        "baseline_p20_pct": 80.0,
+        "baseline_p50_pct": 84.0,
+        "logistic_p20_pct": 80.0,
+        "logistic_p50_pct": 84.0,
+        "forest_p20_pct": 85.0,
+        "forest_p50_pct": 84.0
+      },
+      {
+        "validation_fold": 3,
+        "decline_base_rate_pct": 35.6,
+        "baseline_p20_pct": 70.0,
+        "baseline_p50_pct": 60.0,
+        "logistic_p20_pct": 75.0,
+        "logistic_p50_pct": 68.0,
+        "forest_p20_pct": 50.0,
+        "forest_p50_pct": 54.0
+      },
+      {
+        "validation_fold": 4,
+        "decline_base_rate_pct": 54.4,
+        "baseline_p20_pct": 95.0,
+        "baseline_p50_pct": 78.0,
+        "logistic_p20_pct": 75.0,
+        "logistic_p50_pct": 80.0,
+        "forest_p20_pct": 40.0,
+        "forest_p50_pct": 56.0
+      },
+      {
+        "validation_fold": 5,
+        "decline_base_rate_pct": 51.3,
+        "baseline_p20_pct": 65.0,
+        "baseline_p50_pct": 66.0,
+        "logistic_p20_pct": 65.0,
+        "logistic_p50_pct": 56.0,
+        "forest_p20_pct": 70.0,
+        "forest_p50_pct": 68.0
+      }
+    ],
+    "method_results": [
+      {
+        "method": "Fixed baseline",
+        "outcome_base_rate_pct": 51.1,
+        "mean_p20_pct": 75.0,
+        "p20_std_pp": 12.7,
+        "mean_p50_pct": 68.8,
+        "p50_std_pp": 11.9
+      },
+      {
+        "method": "Logistic Regression",
+        "outcome_base_rate_pct": 51.1,
+        "mean_p20_pct": 72.0,
+        "p20_std_pp": 6.7,
+        "mean_p50_pct": 69.2,
+        "p50_std_pp": 12.6
+      },
+      {
+        "method": "Random Forest",
+        "outcome_base_rate_pct": 51.1,
+        "mean_p20_pct": 62.0,
+        "p20_std_pp": 17.5,
+        "mean_p50_pct": 65.6,
+        "p50_std_pp": 11.9
+      }
+    ]
+  },
+  "temporal_evaluation": {
+    "training_feature_month": "2026-03",
+    "training_outcome_month": "2026-04",
+    "scoring_month": "2026-05",
+    "outcome_month": "2026-06",
+    "frozen_scoring_row_count": 237910,
+    "matched_evaluation_row_count": 184877,
+    "matched_client_count": 52,
+    "match_rate_pct": 77.7,
+    "outcome_base_rate_pct": 67.2,
+    "is_sealed_test_conducted": true,
+    "method_results": [
+      {
+        "method": "Fixed baseline",
+        "outcome_base_rate_pct": 67.2,
+        "p20_pct": 75.0,
+        "p20_lift_vs_base_rate_pp": 7.8,
+        "p50_pct": 84.0,
+        "p50_lift_vs_base_rate_pp": 16.8
+      },
+      {
+        "method": "Logistic Regression",
+        "outcome_base_rate_pct": 67.2,
+        "p20_pct": 70.0,
+        "p20_lift_vs_base_rate_pp": 2.8,
+        "p50_pct": 84.0,
+        "p50_lift_vs_base_rate_pp": 16.8
+      },
+      {
+        "method": "Random Forest",
+        "outcome_base_rate_pct": 67.2,
+        "p20_pct": 70.0,
+        "p20_lift_vs_base_rate_pp": 2.8,
+        "p50_pct": 74.0,
+        "p50_lift_vs_base_rate_pp": 6.8
+      }
+    ]
+  },
+  "model": {
+    "feature_columns": [
+      "log1p_march_impressions_count",
+      "log1p_march_clicks_count",
+      "march_avg_search_position",
+      "march_ctr_pct",
+      "is_zero_click",
+      "is_baseline_eligible"
+    ],
+    "feature_count": 6,
+    "logistic_max_iteration_count": 2000,
+    "forest_tree_count": 150,
+    "forest_max_depth_count": 8,
+    "forest_minimum_leaf_count": 50,
+    "forest_max_features": "sqrt"
+  },
+  "baseline": {
+    "minimum_impressions_count": 100,
+    "required_click_count": 0,
+    "minimum_avg_search_position_exclusive": 0,
+    "maximum_avg_search_position_inclusive": 20,
+    "ranking_value": "feature_month_impressions_count",
+    "reason_code": "visible_zero_ctr_top20",
+    "score_interpretation": "relative_exposure_ranking_not_probability"
+  },
+  "operational_queue": {
+    "observation_month": "2026-03",
+    "queue_count": 24012,
+    "operational_k_count": 50,
+    "queue_reviewed_pct": 0.2082,
+    "top_k_impressions_count": 604300,
+    "queue_impressions_count": 12751788,
+    "top_k_exposure_share_pct": 4.7389,
+    "is_human_review_required": true,
+    "is_automatic_editing_allowed": false
+  },
+  "coverage": {
+    "minimum_march_observed_day_count": 1,
+    "median_march_observed_day_count": 29.0,
+    "maximum_march_observed_day_count": 31,
+    "minimum_april_observed_day_count": 1,
+    "median_april_observed_day_count": 29.0,
+    "maximum_april_observed_day_count": 30,
+    "minimum_may_observed_day_count": 1,
+    "median_may_observed_day_count": 22.0,
+    "maximum_may_observed_day_count": 31,
+    "minimum_june_observed_day_count": 1,
+    "median_june_observed_day_count": 26.0,
+    "maximum_june_observed_day_count": 30
+  },
+  "error_analysis": {
+    "method_summary": [
+      {
+        "evaluation_design": "client_grouped_march_to_april",
+        "method": "Fixed baseline",
+        "top_k_per_evaluation_count": 50,
+        "total_pick_count": 250,
+        "correct_pick_count": 172,
+        "weak_pick_count": 78,
+        "precision_pct": 68.8
+      },
+      {
+        "evaluation_design": "sealed_may_to_june",
+        "method": "Fixed baseline",
+        "top_k_per_evaluation_count": 50,
+        "total_pick_count": 50,
+        "correct_pick_count": 42,
+        "weak_pick_count": 8,
+        "precision_pct": 84.0
+      },
+      {
+        "evaluation_design": "client_grouped_march_to_april",
+        "method": "Logistic Regression",
+        "top_k_per_evaluation_count": 50,
+        "total_pick_count": 250,
+        "correct_pick_count": 173,
+        "weak_pick_count": 77,
+        "precision_pct": 69.2
+      },
+      {
+        "evaluation_design": "sealed_may_to_june",
+        "method": "Logistic Regression",
+        "top_k_per_evaluation_count": 50,
+        "total_pick_count": 50,
+        "correct_pick_count": 42,
+        "weak_pick_count": 8,
+        "precision_pct": 84.0
+      },
+      {
+        "evaluation_design": "client_grouped_march_to_april",
+        "method": "Random Forest",
+        "top_k_per_evaluation_count": 50,
+        "total_pick_count": 250,
+        "correct_pick_count": 164,
+        "weak_pick_count": 86,
+        "precision_pct": 65.6
+      },
+      {
+        "evaluation_design": "sealed_may_to_june",
+        "method": "Random Forest",
+        "top_k_per_evaluation_count": 50,
+        "total_pick_count": 50,
+        "correct_pick_count": 37,
+        "weak_pick_count": 13,
+        "precision_pct": 74.0
+      }
+    ],
+    "temporal_weak_pick_summary": [
+      {
+        "method": "Fixed baseline",
+        "weak_pick_count": 8,
+        "increased_impressions_count": 6,
+        "median_impressions_change_pct": 41.5,
+        "minimum_impressions_change_pct": -12.4,
+        "maximum_impressions_change_pct": 147.9,
+        "partial_june_coverage_count": 1,
+        "median_june_observed_day_count": 30.0
+      },
+      {
+        "method": "Logistic Regression",
+        "weak_pick_count": 8,
+        "increased_impressions_count": 7,
+        "median_impressions_change_pct": 42.1,
+        "minimum_impressions_change_pct": 0.0,
+        "maximum_impressions_change_pct": 147.9,
+        "partial_june_coverage_count": 0,
+        "median_june_observed_day_count": 30.0
+      },
+      {
+        "method": "Random Forest",
+        "weak_pick_count": 13,
+        "increased_impressions_count": 11,
+        "median_impressions_change_pct": 49.7,
+        "minimum_impressions_change_pct": -14.6,
+        "maximum_impressions_change_pct": 381.4,
+        "partial_june_coverage_count": 4,
+        "median_june_observed_day_count": 30.0
+      }
+    ],
+    "temporal_top50_overlap": [
+      {
+        "first_method": "Fixed baseline",
+        "second_method": "Logistic Regression",
+        "shared_top50_pick_count": 42,
+        "shared_top50_fraction": 0.84
+      },
+      {
+        "first_method": "Fixed baseline",
+        "second_method": "Random Forest",
+        "shared_top50_pick_count": 1,
+        "shared_top50_fraction": 0.02
+      },
+      {
+        "first_method": "Logistic Regression",
+        "second_method": "Random Forest",
+        "shared_top50_pick_count": 1,
+        "shared_top50_fraction": 0.02
+      }
+    ]
+  },
+  "sensitivity_analysis": [
+    {
+      "variant": "logistic_with_six_features",
+      "feature_count": 6,
+      "mean_p20_pct": 72.0,
+      "mean_p50_pct": 69.2,
+      "p50_difference_vs_reference_pp": 0.0
+    },
+    {
+      "variant": "logistic_without_baseline_flag",
+      "feature_count": 5,
+      "mean_p20_pct": 72.0,
+      "mean_p50_pct": 69.2,
+      "p50_difference_vs_reference_pp": 0.0
+    }
+  ],
+  "monitoring": [
+    {
+      "monitor_order": 1,
+      "monitor_name": "pipeline_and_schema_integrity",
+      "review_frequency": "every_run",
+      "trigger_rule": "any_assertion_or_export_failure",
+      "required_response": "stop_queue_and_investigate"
+    },
+    {
+      "monitor_order": 2,
+      "monitor_name": "queue_count_drift",
+      "review_frequency": "every_monthly_run",
+      "trigger_rule": "absolute_change_exceeds_25_pct",
+      "required_response": "audit_data_coverage_and_rule_population"
+    },
+    {
+      "monitor_order": 3,
+      "monitor_name": "realized_precision_at_50",
+      "review_frequency": "when_outcomes_mature",
+      "trigger_rule": "drop_exceeds_10_pp_or_no_better_than_base_rate",
+      "required_response": "audit_data_rule_and_validation"
+    },
+    {
+      "monitor_order": 4,
+      "monitor_name": "human_abstention",
+      "review_frequency": "every_review_cycle",
+      "trigger_rule": "abstention_exceeds_50_pct",
+      "required_response": "review_reason_codes_and_actionability"
+    },
+    {
+      "monitor_order": 5,
+      "monitor_name": "persistent_performance_degradation",
+      "review_frequency": "after_two_mature_cycles",
+      "trigger_rule": "performance_trigger_repeats_for_two_cycles",
+      "required_response": "consider_rule_revision_or_model_retraining"
+    }
+  ],
+  "leakage_and_privacy_checks": {
+    "identifier_feature_count": 0,
+    "future_or_label_derived_feature_count": 0,
+    "product_generated_feature_count": 0,
+    "train_validation_client_overlap_count": 0,
+    "is_private_row_displayed": false,
+    "is_score_probability": false,
+    "is_queue_csv_commit_allowed": false
+  },
+  "environment": {
+    "python_version": "3.13.15",
+    "pandas_version": "2.2.3",
+    "numpy_version": "2.1.3",
+    "duckdb_version": "1.3.2",
+    "scikit_learn_version": "1.6.1"
+  },
+  "data_credit": "Built on the FlyRank ML Internship dataset",
+  "claim_limit": "decision_support_only_no_causal_refresh_or_search_algorithm_claim"
+}
